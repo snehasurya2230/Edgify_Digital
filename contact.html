@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-variation="editorial">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact Edgify Digital Marketing</title>
+<meta name="description" content="Book a thirty-minute audit. Or just say hi." />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-screen-label="Contact">
+
+<header class="nav">
+ <div class="container nav-inner">
+ <a class="brand" href="index.html" aria-label="Edgify Digital Marketing home"><img src="assets/edgify-logo-light.png" alt="Edgify Digital Marketing" /></a>
+ <nav class="nav-links" aria-label="Primary">
+ <a href="index.html">Home</a>
+ <a href="services.html">Services</a>
+ <a href="about.html">About</a>
+ <a href="pricing.html">Pricing</a>
+ <a href="contact.html" class="is-active">Contact</a>
+ </nav>
+ <div class="nav-cta">
+ <a href="#brief" class="btn btn-primary">Skip to brief <span class="btn-arrow">↓</span></a>
+ </div>
+ </div>
+</header>
+
+<!-- ============== BANNER ============== -->
+<section class="page-banner">
+ <div class="container">
+ <div class="crumbs"><a href="index.html">Edgify</a> <span>/</span> Contact</div>
+ <h1 class="display h-xl">Send us the brief. <span class="ital">Or just</span> the problem.</h1>
+ <p class="lede" style="margin-top:28px;max-width:64ch;">
+ We reply to every enquiry within one working day. If you'd rather skip the
+ form, the inbox is at the bottom of every page.
+ </p>
+ </div>
+</section>
+
+<!-- ============== FORM + SIDEBAR ============== -->
+<section class="section" id="brief">
+ <div class="container">
+ <div class="contact-grid">
+
+ <form class="form" onsubmit="event.preventDefault(); this.querySelector('button[type=submit]').innerText='Sent back in a day ✓'; this.querySelector('button[type=submit]').disabled=true;">
+ <div class="field-row">
+ <div class="field">
+ <label for="name">Your name</label>
+ <input id="name" type="text" placeholder="Arjun Ramaswamy" autocomplete="name" required />
+ </div>
+ <div class="field">
+ <label for="company">Company</label>
+ <input id="company" type="text" placeholder="Shalom Group" required />
+ </div>
+ </div>
+ <div class="field-row">
+ <div class="field">
+ <label for="email">Email</label>
+ <input id="email" type="email" placeholder="arjun@yourcompany.in" autocomplete="email" required />
+ </div>
+ <div class="field">
+ <label for="phone">Phone (optional) / WhatsApp</label>
+ <input id="phone" type="tel" placeholder="+91 …" autocomplete="tel" />
+ </div>
+ </div>
+
+ <div class="field">
+ <label>What do you need help with?</label>
+ <div class="chips" id="services-chips">
+ <button type="button" class="chip" data-svc="web">Website</button>
+ <button type="button" class="chip" data-svc="ads">Paid ads</button>
+ <button type="button" class="chip" data-svc="social">Social</button>
+ <button type="button" class="chip" data-svc="brand">Brand</button>
+ <button type="button" class="chip" data-svc="seo">SEO</button>
+ <button type="button" class="chip" data-svc="analytics">Analytics</button>
+ <button type="button" class="chip" data-svc="logo">Logo only</button>
+ <button type="button" class="chip" data-svc="other">Other</button>
+ </div>
+ </div>
+
+ <div class="field-row">
+ <div class="field">
+ <label for="budget">Monthly budget</label>
+ <select id="budget">
+ <option>Just exploring</option>
+ <option>Small getting started</option>
+ <option>Medium ready to scale</option>
+ <option>Large multi-channel</option>
+ <option>Not sure yet</option>
+ </select>
+ </div>
+ <div class="field">
+ <label for="timing">When do you want to start?</label>
+ <select id="timing">
+ <option>This month</option>
+ <option>Next month</option>
+ <option>This quarter</option>
+ <option>Just exploring</option>
+ </select>
+ </div>
+ </div>
+
+ <div class="field">
+ <label for="brief-text">The brief</label>
+ <textarea id="brief-text" placeholder="A paragraph is plenty. What's the business, what's stuck, and what would &ldquo;done&rdquo; look like?"></textarea>
+ </div>
+
+ <button type="submit" class="btn btn-primary" style="justify-self:start;">Send the brief <span class="btn-arrow">→</span></button>
+ <p style="font-size:13px;color:var(--text-mute);margin:4px 0 0;">By submitting, you agree to our <a href="#" style="color:var(--text-dim);text-decoration:underline;">privacy notice</a>. We never share enquiries.</p>
+ </form>
+
+ <aside class="contact-side">
+ <image-slot id="contact-office" shape="rounded" radius="14"
+ style="width:100%;height:auto;aspect-ratio:4/3;border:1px solid var(--line);background:var(--bg-2);margin-bottom:32px;"
+ placeholder="Drop an office or team shot"></image-slot>
+ <dl>
+ <div>
+ <dt>General &amp; new business</dt>
+ <dd><a href="mailto:digitaledgify@gmail.com">digitaledgify@gmail.com</a></dd>
+ </div>
+ <div>
+ <dt>Phone &amp; WhatsApp</dt>
+ <dd><a href="tel:+919994410224">+91 99944 10224</a></dd>
+ </div>
+ <div>
+ <dt>LinkedIn</dt>
+ <dd><a href="https://linkedin.com/in/snehapriya-karthikeyan-6699b81b1" target="_blank" rel="noopener" style="font-size:17px;color:var(--text);font-weight:500;">@snehapriya-karthikeyan &nearr;</a></dd>
+ </div>
+ <div>
+ <dt>Based in</dt>
+ <dd>Salem, Tamil Nadu &middot; India<br /><span style="font-size:14px;color:var(--text-dim);font-weight:500;">Working with clients across Salem, Tamil Nadu.</span></dd>
+ </div>
+ <div>
+ <dt>Hours</dt>
+ <dd>Mon Sat &middot; 10:00 19:00 IST</dd>
+ </div>
+ </dl>
+ </aside>
+ </div>
+ </div>
+</section>
+
+<!-- ============== CTA STRIP ============== -->
+<section class="section-tight" style="border-block:1px solid var(--line);">
+ <div class="container">
+ <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);">
+ <div style="padding:32px 28px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;">
+ <span class="icon-mark"><svg viewBox="0 0 48 48" fill="none">
+ <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/>
+ <path d="M24 12 L24 24 L32 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+ </svg></span>
+ <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:700;">Response time</div>
+ <div style="font-family:var(--font-display);font-weight:700;letter-spacing:-0.02em;font-size:22px;line-height:1.2;">Within one working day</div>
+ </div>
+ <div style="padding:32px 28px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;">
+ <span class="icon-mark" style="color:var(--accent-2);"><svg viewBox="0 0 48 48" fill="none">
+ <circle cx="16" cy="20" r="6" stroke="currentColor" stroke-width="2.5"/>
+ <circle cx="32" cy="20" r="6" stroke="currentColor" stroke-width="2.5"/>
+ <path d="M6 38 C 6 30, 26 30, 26 38" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+ <path d="M22 38 C 22 30, 42 30, 42 38" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.55"/>
+ </svg></span>
+ <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-2);font-weight:700;">First call</div>
+ <div style="font-family:var(--font-display);font-weight:700;letter-spacing:-0.02em;font-size:22px;line-height:1.2;">30 minutes, no deck</div>
+ </div>
+ <div style="padding:32px 28px;display:flex;flex-direction:column;gap:14px;">
+ <span class="icon-mark"><svg viewBox="0 0 48 48" fill="none">
+ <path d="M24 6 C 14 6, 8 14, 8 22 C 8 32, 24 42, 24 42 C 24 42, 40 32, 40 22 C 40 14, 34 6, 24 6 Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+ <circle cx="24" cy="22" r="5" fill="currentColor"/>
+ </svg></span>
+ <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:700;">Working with</div>
+ <div style="font-family:var(--font-display);font-weight:700;letter-spacing:-0.02em;font-size:22px;line-height:1.2;">Clients across Salem, Tamil Nadu</div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<footer class="footer">
+ <div class="container">
+ <p class="footer-claim">Edgify <span class="grad">Digital.</span></p>
+ <div class="footer-grid">
+ <div class="footer-col">
+ <h5>Edgify Digital</h5>
+ <p style="color:var(--text-dim);font-size:14.5px;max-width:36ch;margin:0;">A small digital marketing team. Based in Salem, Tamil Nadu.</p>
+ </div>
+ <div class="footer-col">
+ <h5>Site</h5>
+ <ul>
+ <li><a href="index.html">Home</a></li>
+ <li><a href="services.html">Services</a></li>
+ <li><a href="about.html">About</a></li>
+ <li><a href="pricing.html">Pricing</a></li>
+ <li><a href="contact.html">Contact</a></li>
+ </ul>
+ </div>
+ <div class="footer-col">
+ <h5>Services</h5>
+ <ul>
+ <li><a href="services.html#web">Web design &amp; dev</a></li>
+ <li><a href="services.html#ads">Performance ads</a></li>
+ <li><a href="services.html#social">Social media</a></li>
+ <li><a href="services.html#brand">Brand identity</a></li>
+ <li><a href="services.html#seo">SEO &amp; content</a></li>
+ <li><a href="services.html#analytics">Analytics</a></li>
+ </ul>
+ </div>
+ <div class="footer-col">
+ <h5>Get in touch</h5>
+ <ul>
+ <li><a href="mailto:digitaledgify@gmail.com">digitaledgify@gmail.com</a></li>
+ <li><a href="tel:+919994410224">+91 99944 10224</a></li>
+ <li><a href="https://linkedin.com/in/snehapriya-karthikeyan-6699b81b1" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+ <li><a href="#">Instagram ↗</a></li>
+ </ul>
+ </div>
+ </div>
+ <div class="footer-bottom">
+ <span>© 2026 Edgify Digital Marketing. Salem, Tamil Nadu.</span>
+ <span>Toggle Tweaks in the toolbar to compare variations.</span>
+ </div>
+ </div>
+</footer>
+
+<script src="assets/image-slot.js"></script>
+<script src="assets/tweaks.js"></script>
+<script>
+ // chip toggles
+ document.querySelectorAll('#services-chips .chip').forEach(c => {
+ c.addEventListener('click', () => c.classList.toggle('is-on'));
+ });
+</script>
+</body>
+</html>
