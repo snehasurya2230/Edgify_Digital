@@ -1298,6 +1298,9 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
   aspect-ratio: 4/5;
   border: 1px solid var(--line);
   background: var(--bg-2);
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
 }
 @media (max-width: 900px) {
   .story-grid { grid-template-columns: 1fr; }
@@ -1500,4 +1503,275 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
   color: #fff;
   border-color: var(--accent);
   font-weight: 600;
+}
+
+/* =========================================================
+   MOBILE NAV — hamburger + slide-down drawer
+   ========================================================= */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  margin-left: 4px;
+  transition: background .15s ease, border-color .15s ease;
+}
+.nav-toggle:hover { background: var(--surface); border-color: var(--text-dim); }
+.nav-toggle-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+.nav-toggle.is-open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  right: 0;
+  z-index: 49;
+  background: color-mix(in oklab, var(--bg) 96%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height .3s ease, opacity .2s ease;
+  pointer-events: none;
+}
+.nav-mobile.is-open {
+  max-height: calc(100vh - 76px);
+  opacity: 1;
+  pointer-events: auto;
+  overflow-y: auto;
+}
+.nav-mobile-inner {
+  padding: 14px var(--pad) 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nav-mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: stretch;
+}
+.nav-mobile-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  border: 1px solid transparent;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.nav-mobile-links a:hover { background: var(--bg-2); }
+.nav-mobile-links a.is-active {
+  background: var(--bg-2);
+  border-color: var(--line);
+  color: var(--accent);
+}
+.nav-mobile-links a::after {
+  content: "→";
+  color: var(--text-mute);
+  font-weight: 500;
+  transition: transform .2s ease, color .15s ease;
+}
+.nav-mobile-links a:hover::after { color: var(--accent); transform: translateX(3px); }
+.nav-mobile-cta {
+  display: flex;
+  margin-top: 10px;
+}
+.nav-mobile-cta .btn { width: 100%; justify-content: center; padding-block: 16px; }
+
+html.nav-locked, html.nav-locked body { overflow: hidden; }
+
+@media (max-width: 820px) {
+  .nav-toggle { display: inline-flex; }
+  .nav-cta { display: none; }
+  .nav-inner { gap: 12px; }
+}
+
+/* =========================================================
+   GENERAL MOBILE TUNING
+   ========================================================= */
+
+/* Tighter container padding on very small screens */
+@media (max-width: 480px) {
+  :root { --pad: 18px; }
+}
+
+/* Hero — better proportions on small screens */
+@media (max-width: 900px) {
+  .hero[data-layout="split"] .hero-visual {
+    aspect-ratio: 4/3;
+    min-height: 0;
+    max-height: 60vh;
+  }
+}
+@media (max-width: 640px) {
+  .hero { padding-top: 32px; padding-bottom: 48px; }
+  .hero[data-layout="split"] .hero-visual { aspect-ratio: 5/4; max-height: 380px; }
+  .hero-actions .btn { padding: 13px 18px; font-size: 14.5px; }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+    margin-top: 36px;
+    padding-top: 22px;
+  }
+  .hero-meta > div { min-width: 0; }
+  .hero-meta .num { font-size: 30px; }
+  .hero-meta .lbl { font-size: 12px; }
+}
+@media (max-width: 420px) {
+  .hero-actions { gap: 10px; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+}
+
+/* Section padding cap on small screens */
+@media (max-width: 640px) {
+  .section { padding-block: 56px; }
+  .section-tight { padding-block: 40px; }
+  .section-head { margin-bottom: 32px; gap: 18px; }
+}
+
+/* Display type — pull down on tiny screens (override inline font-size on hero h1) */
+@media (max-width: 640px) {
+  .h-xl { font-size: clamp(40px, 11vw, 64px) !important; line-height: 1; }
+}
+@media (max-width: 420px) {
+  .h-xl { font-size: clamp(38px, 12vw, 52px) !important; line-height: 1; }
+  .h-lg { font-size: clamp(32px, 9vw, 44px); line-height: 1.02; }
+  .h-md { font-size: clamp(26px, 7vw, 34px); }
+  .lede { font-size: 16px; }
+}
+
+/* Services — single col earlier, tighter padding */
+@media (max-width: 640px) {
+  .service { padding: 28px 22px 26px; gap: 14px; }
+  .service-mark { width: 44px; height: 44px; }
+  .service h3 { font-size: 21px; }
+  .service p { font-size: 14.5px; }
+}
+
+/* Steps — single column on the smallest screens */
+@media (max-width: 520px) {
+  .steps { grid-template-columns: 1fr; }
+  .step { border-right: 0 !important; padding: 26px 22px 24px; }
+  .step:last-child { border-bottom: 0; }
+  .step-num { font-size: 44px; }
+}
+
+/* Funnel — single column on tiny screens */
+@media (max-width: 520px) {
+  .funnel { grid-template-columns: 1fr; }
+  .funnel-stage { border-right: 0; border-bottom: 1px solid var(--line); padding: 22px 20px 24px; }
+  .funnel-stage:last-child { border-bottom: 0; }
+}
+
+/* Case studies — stack at 540px and trim padding */
+@media (max-width: 540px) {
+  .work { grid-template-columns: 1fr; gap: 18px; }
+  .case-feature, .case-half { grid-column: 1 / -1; }
+  .case-body { padding: 20px 22px 22px; }
+  .case h4 { font-size: 21px; }
+  .case-thumb { font-size: 26px; padding: 18px; }
+  .case-thumb.has-shot .thumb-label { font-size: 18px; left: 16px; bottom: 16px; padding: 8px 12px; }
+  .case-result { gap: 14px; margin-top: 16px; padding-top: 14px; }
+  .case-result .num { font-size: 20px; }
+}
+
+/* CTA block — tighter on mobile */
+@media (max-width: 640px) {
+  .cta-block { padding: 36px 28px; gap: 20px; }
+  .cta-block .hero-actions { margin-top: 18px; }
+}
+
+/* Marquee — smaller, faster on mobile so it reads */
+@media (max-width: 640px) {
+  .marquee { padding-block: 14px; }
+  .marquee-track { gap: 36px; font-size: 18px; animation-duration: 24s; }
+}
+
+/* Footer */
+@media (max-width: 640px) {
+  .footer { padding-block: 44px 24px; }
+  .footer-claim { margin-bottom: 36px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; padding-bottom: 32px; }
+}
+@media (max-width: 720px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: left;
+  }
+}
+
+/* Page banner — tighter */
+@media (max-width: 640px) {
+  .page-banner { padding-block: 56px; }
+  .page-banner .crumbs { margin-bottom: 18px; }
+}
+
+/* Services list page rows */
+@media (max-width: 640px) {
+  .svc-row { padding: 28px 0; gap: 14px; }
+  .svc-row, .svc-row.has-art { grid-template-columns: 48px 1fr; }
+  .svc-title { font-size: 24px; }
+  .svc-desc { font-size: 15px; }
+}
+
+/* Contact form */
+@media (max-width: 640px) {
+  .field input, .field textarea, .field select { padding: 13px 14px; font-size: 16px; }
+  .field textarea { min-height: 120px; }
+}
+
+/* Inline contact strip (contact.html) — stack on mobile */
+@media (max-width: 820px) {
+  .contact-strip { grid-template-columns: 1fr !important; }
+  .contact-strip > div { border-right: 0 !important; border-bottom: 1px solid var(--line); }
+  .contact-strip > div:last-child { border-bottom: 0 !important; }
+}
+
+/* Tweaks panel — fit small screens, sit above mobile nav */
+@media (max-width: 480px) {
+  #tweaks-panel {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+  }
+  .tweak-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* Buttons — bigger tap targets, never overflow */
+@media (max-width: 480px) {
+  .btn { padding: 13px 18px; }
+}
+
+/* Prevent horizontal overflow on small screens */
+@media (max-width: 640px) {
+  html, body { overflow-x: hidden; }
 }
