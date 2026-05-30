@@ -29,7 +29,7 @@
 <section class="page-banner">
  <div class="container">
  <div class="crumbs"><a href="index.html">Edgify</a> <span>/</span> Contact</div>
- <h1 class="display h-xl">Send us the brief. <span class="ital">Or just</span> the problem.</h1>
+ <h1 class="display h-xl" style="font-size: 75px">Send us the brief. <span class="ital">Or just</span> the problem.</h1>
  <p class="lede" style="margin-top:28px;max-width:64ch;">
  We reply to every enquiry within one working day. If you'd rather skip the
  form, the inbox is at the bottom of every page.
@@ -110,9 +110,8 @@
  </form>
 
  <aside class="contact-side">
- <image-slot id="contact-office" shape="rounded" radius="14"
- style="width:100%;height:auto;aspect-ratio:4/3;border:1px solid var(--line);background:var(--bg-2);margin-bottom:32px;"
- placeholder="Drop an office or team shot"></image-slot>
+ <img src="assets/contact-office.webp" alt="Edgify Digital Marketing — office" loading="lazy"
+ style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line);background:var(--bg-2);margin-bottom:32px;border-radius:14px;display:block;" />
  <dl>
  <div>
  <dt>General &amp; new business</dt>
@@ -143,7 +142,7 @@
 <!-- ============== CTA STRIP ============== -->
 <section class="section-tight" style="border-block:1px solid var(--line);">
  <div class="container">
- <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);">
+ <div class="contact-strip" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);">
  <div style="padding:32px 28px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;">
  <span class="icon-mark"><svg viewBox="0 0 48 48" fill="none">
  <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/>
@@ -221,6 +220,7 @@
 </footer>
 
 <script src="assets/image-slot.js"></script>
+<script src="assets/mobile-nav.js"></script>
 <script src="assets/tweaks.js"></script>
 <script>
  // chip toggles
