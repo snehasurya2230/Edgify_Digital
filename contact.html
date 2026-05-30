@@ -42,25 +42,27 @@
  <div class="container">
  <div class="contact-grid">
 
- <form class="form" onsubmit="event.preventDefault(); this.querySelector('button[type=submit]').innerText='Sent back in a day ✓'; this.querySelector('button[type=submit]').disabled=true;">
+ <form class="form" action="https://formspree.io/f/mlgvvyno" method="POST">
+
  <div class="field-row">
  <div class="field">
  <label for="name">Your name</label>
- <input id="name" type="text" placeholder="Arjun Ramaswamy" autocomplete="name" required />
+ <input id="name" name="name" type="text" placeholder="Full Name" autocomplete="name" required />
  </div>
  <div class="field">
  <label for="company">Company</label>
- <input id="company" type="text" placeholder="Shalom Group" required />
+ <input id="company" name="company" type="text" placeholder="Company Name" required />
  </div>
  </div>
+
  <div class="field-row">
  <div class="field">
  <label for="email">Email</label>
- <input id="email" type="email" placeholder="arjun@yourcompany.in" autocomplete="email" required />
+ <input id="email" name="email" type="email" placeholder="name@yourcompany.in" autocomplete="email" required />
  </div>
  <div class="field">
- <label for="phone">Phone (optional) / WhatsApp</label>
- <input id="phone" type="tel" placeholder="+91 …" autocomplete="tel" />
+ <label for="phone">Phone (optional) / WhatsApp</label>
+ <input id="phone" name="phone" type="tel" placeholder="+91 9876543210" autocomplete="tel" />
  </div>
  </div>
 
@@ -76,12 +78,14 @@
  <button type="button" class="chip" data-svc="logo">Logo only</button>
  <button type="button" class="chip" data-svc="other">Other</button>
  </div>
+ <!-- Hidden input to capture selected chips -->
+ <input type="hidden" name="services" id="services-hidden" />
  </div>
 
  <div class="field-row">
  <div class="field">
  <label for="budget">Monthly budget</label>
- <select id="budget">
+ <select id="budget" name="budget">
  <option>Just exploring</option>
  <option>Small getting started</option>
  <option>Medium ready to scale</option>
@@ -91,7 +95,7 @@
  </div>
  <div class="field">
  <label for="timing">When do you want to start?</label>
- <select id="timing">
+ <select id="timing" name="timing">
  <option>This month</option>
  <option>Next month</option>
  <option>This quarter</option>
@@ -102,7 +106,7 @@
 
  <div class="field">
  <label for="brief-text">The brief</label>
- <textarea id="brief-text" placeholder="A paragraph is plenty. What's the business, what's stuck, and what would &ldquo;done&rdquo; look like?"></textarea>
+ <textarea id="brief-text" name="message" placeholder="Describe your business and what you'd like to achieve."></textarea>
  </div>
 
  <button type="submit" class="btn btn-primary" style="justify-self:start;">Send the brief <span class="btn-arrow">→</span></button>
@@ -223,9 +227,15 @@
 <script src="assets/mobile-nav.js"></script>
 <script src="assets/tweaks.js"></script>
 <script>
- // chip toggles
+ // chip toggles + capture selected values into hidden input
  document.querySelectorAll('#services-chips .chip').forEach(c => {
- c.addEventListener('click', () => c.classList.toggle('is-on'));
+   c.addEventListener('click', () => {
+     c.classList.toggle('is-on');
+     // Update hidden input with all selected chip labels
+     const selected = [...document.querySelectorAll('#services-chips .chip.is-on')]
+       .map(el => el.textContent).join(', ');
+     document.getElementById('services-hidden').value = selected;
+   });
  });
 </script>
 </body>
