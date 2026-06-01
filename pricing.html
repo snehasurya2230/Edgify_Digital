@@ -369,7 +369,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  <li><a href="mailto:digitaledgify@gmail.com">digitaledgify@gmail.com</a></li>
  <li><a href="tel:+919994410224">+91 99944 10224</a></li>
  <li><a href="https://www.linkedin.com/company/117165131/admin/dashboard/" target="_blank" rel="noopener">LinkedIn &nearr;</a></li>
- <li><a href="https://www.instagram.com/edgifydigital_/" target="_blank" rel="noopener">Instagram ↗</a></li>
+ <li><a href="#">Instagram &nearr;</a></li>
  </ul>
  </div>
  </div>
@@ -392,13 +392,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  <p class="modal-sub">60 seconds. We'll come back within one working day.</p>
  </div>
 
- <form class="modal-form" id="consult-form" action="https://formspree.io/f/mlgvvyno" method="POST">
+ <form class="modal-form" id="consult-form">
  <input type="hidden" name="path" id="consult-path" value="" />
 
  <div class="modal-row">
  <div class="modal-field">
  <label>Your name</label>
- <input type="text" name="name" placeholder="Full Name" required />
+ <input type="text" name="name" placeholder="Arjun Ramaswamy" required />
  </div>
  <div class="modal-field">
  <label>Company</label>
@@ -412,7 +412,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </div>
  <div class="modal-field">
  <label>Phone / WhatsApp</label>
- <input type="tel" name="phone" placeholder="+91 9876543210" />
+ <input type="tel" name="phone" placeholder="+91 …" />
  </div>
  </div>
  <div class="modal-field">
@@ -456,33 +456,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
  document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('is-open')) close(); });
 
- form.addEventListener('submit', async e => {
- e.preventDefault();
- submitBtn.innerHTML = 'Sending…';
- submitBtn.disabled = true;
-
- const data = new FormData(form);
- try {
-   const res = await fetch('https://formspree.io/f/mlgvvyno', {
-     method: 'POST',
-     body: data,
-     headers: { 'Accept': 'application/json' }
-   });
-   if (res.ok) {
-     submitBtn.innerHTML = 'Sent! We\'ll be back within a day ✓';
-     form.reset();
-   } else {
-     submitBtn.innerHTML = 'Something went wrong — try again';
-     submitBtn.disabled = false;
-   }
- } catch(err) {
-   submitBtn.innerHTML = 'Network error — try again';
-   submitBtn.disabled = false;
- }
- });
+ form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    submitBtn.innerHTML = 'Sending…';
+    submitBtn.disabled = true;
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://formspree.io/f/mlgvvyno', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'form_submit', form_name: 'consultation_form' });
+        submitBtn.innerHTML = "Sent! We'll be back within a day ✓";
+        form.reset();
+      } else {
+        submitBtn.innerHTML = 'Something went wrong — try again';
+        submitBtn.disabled = false;
+      }
+    } catch(err) {
+      submitBtn.innerHTML = 'Network error — try again';
+      submitBtn.disabled = false;
+    }
+  });
  })();
 </script>
-
 
 <!-- WhatsApp Float Button -->
 <a href="https://wa.me/919994410224?text=Hi!%20I'd%20like%20to%20book%20a%20free%20consultation%20with%20Edgify." 
