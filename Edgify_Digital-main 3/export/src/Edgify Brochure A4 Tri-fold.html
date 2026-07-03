@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en" data-screen-label="Brochure · A4 tri-fold">
+<head>
+<meta charset="utf-8">
+<title>Edgify Digital · A4 Tri-fold brochure</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#0A1422"/>
+        <stop offset="100%" stop-color="#11161E"/>
+      </linearGradient>
+      <linearGradient id="ember" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#FF6A3D"/>
+        <stop offset="100%" stop-color="#E03A1F"/>
+      </linearGradient>
+    </defs>
+    <rect width="400" height="400" fill="url(#bg)"/>
+    <g transform="translate(120 120)">
+      <rect x="0" y="0" width="160" height="160" rx="20" fill="url(#ember)" opacity="0.95"/>
+      <path d="M55 50 L105 50 L75 90 L115 90 L60 130 L80 95 L45 95 Z" fill="#fff"/>
+    </g>
+    <text x="200" y="320" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="34" fill="#F3F1EC">Edgify</text>
+  </svg>
+</template>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: #1a1a1a;
+    padding: 32px 0 64px;
+    font-family: var(--font-sans);
+    color: #11161E;
+  }
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+
+  .sheet-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    align-self: flex-start;
+    margin-left: max(32px, calc(50% - 561px));
+  }
+
+  /* A4 landscape at 96dpi: 297 × 210 mm = 1123 × 794 px. We use 1122 for clean /3 = 374 panels. */
+  .sheet {
+    width: 1122px;
+    height: 794px;
+    background: var(--paper);
+    color: #11161E;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+    position: relative;
+    display: grid;
+    grid-template-columns: 374px 374px 374px;
+    overflow: hidden;
+  }
+
+  .panel { position: relative; overflow: hidden; }
+  .panel + .panel { border-left: 1px dashed rgba(15,22,36,0.10); }
+  .sheet.dark .panel + .panel { border-left-color: rgba(255,255,255,0.10); }
+
+  .fold-tick {
+    position: absolute; top: -1px; width: 1px; height: 14px;
+    background: #6E7886;
+  }
+  .fold-tick.bottom { top: auto; bottom: -1px; }
+  .fold-tick.t1 { left: 374px; }
+  .fold-tick.t2 { left: 748px; }
+
+  /* ===========================================================
+     COVER PANEL (outside-right when folded)
+     =========================================================== */
+  .cover {
+    background: var(--ink-1000);
+    color: #F3F1EC;
+    padding: 44px 36px 40px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cover::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(75% 55% at 100% 0%, rgba(255,106,61,0.34), transparent 60%),
+      radial-gradient(60% 50% at 0% 100%, rgba(91,196,238,0.22), transparent 60%);
+    pointer-events: none;
+  }
+  .cover > * { position: relative; }
+  .cover-logo { height: 42px; width: auto; align-self: flex-start; }
+  .cover-eyebrow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-top: 28px;
+  }
+  .cover-title {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 64px; line-height: 0.92; letter-spacing: -0.025em;
+    color: #F3F1EC; margin: 14px 0 0; max-width: 12ch;
+  }
+  .cover-title .grad {
+    background: var(--grad-edge);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .cover-lede {
+    font-family: var(--font-sans); font-size: 15px; line-height: 1.5;
+    color: #BCC4D2; margin-top: 22px; max-width: 30ch;
+  }
+  .cover-list {
+    list-style: none; padding: 0; margin: 22px 0 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+  }
+  .cover-list li {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-sans); font-size: 14px;
+    color: #F3F1EC; font-weight: 500;
+  }
+  .cover-list .tick {
+    width: 22px; height: 22px; border-radius: 99px;
+    background: var(--grad-edge);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
+  }
+  .cover-list .tick svg { width: 12px; height: 12px; color: #fff; stroke-width: 2.5; }
+
+  .cover-tag {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 22px; line-height: 1.2; color: #F3F1EC; margin-top: 28px;
+    letter-spacing: -0.015em;
+  }
+  .cover-tag em {
+    font-style: italic;
+    background: linear-gradient(95deg, #FF6A3D 0%, #FF8F5C 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .cover-contact {
+    margin-top: auto; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    display: flex; gap: 22px; align-items: center;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+  .cover-contact .row { display: flex; align-items: center; gap: 8px; }
+  .cover-contact svg { width: 14px; height: 14px; color: #FF8F5C; stroke-width: 1.75; }
+
+  /* ===========================================================
+     OUTSIDE-MIDDLE PANEL (flap that folds in)
+     =========================================================== */
+  .flap {
+    background: var(--ink-1000);
+    color: #F3F1EC;
+    padding: 44px 32px 40px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .flap::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(80% 60% at 50% 100%, rgba(91,196,238,0.16), transparent 60%);
+    pointer-events: none;
+  }
+  .flap > * { position: relative; }
+  .flap-eyebrow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(91,196,238,0.85);
+  }
+  .flap-quote {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 38px; line-height: 1.05; letter-spacing: -0.022em;
+    color: #F3F1EC; margin: 20px 0 0;
+  }
+  .flap-quote .grad {
+    background: linear-gradient(95deg, #5BC4EE 0%, #2A7BC5 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .flap-sub {
+    font-family: var(--font-sans); font-size: 14px; line-height: 1.55;
+    color: #BCC4D2; margin-top: 18px; max-width: 30ch;
+  }
+
+  .flap-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px;
+  }
+  .flap-stat {
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.02);
+  }
+  .flap-stat .v {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 32px; line-height: 1; letter-spacing: -0.022em;
+    background: var(--grad-edge);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .flap-stat .l {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-top: 6px;
+  }
+
+  .flap-foot {
+    margin-top: auto; display: flex; align-items: center; gap: 12px;
+    padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.10);
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .flap-mark { width: 38px; height: 38px; border-radius: 10px;
+    background: var(--grad-edge);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 8px 24px -6px rgba(255,106,61,0.5);
+  }
+  .flap-mark svg { width: 18px; height: 18px; color: #fff; stroke-width: 2; }
+
+  /* ===========================================================
+     BACK PANEL (outside-left when folded)
+     =========================================================== */
+  .back {
+    background: #F3F1EC;
+    padding: 44px 36px 40px;
+    display: flex; flex-direction: column;
+  }
+  .back-eyebrow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #E03A1F;
+  }
+  .back-head {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 38px; line-height: 1.0; letter-spacing: -0.022em;
+    color: #11161E; margin: 14px 0 0;
+  }
+  .back-head .grad {
+    background: var(--grad-edge);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .back-sub {
+    font-family: var(--font-sans); font-size: 14px; line-height: 1.55;
+    color: #3A4351; margin-top: 16px; max-width: 36ch;
+  }
+
+  .back-sectors {
+    margin-top: 22px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
+  }
+  .back-sectors li {
+    list-style: none;
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-sans); font-size: 13.5px;
+    color: #11161E; font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(15,22,36,0.08);
+  }
+  .back-sectors svg {
+    width: 16px; height: 16px; color: #E03A1F; stroke-width: 1.75; flex-shrink: 0;
+  }
+
+  .back-cta {
+    margin-top: 26px;
+    background: var(--ink-1000); color: #F3F1EC;
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    position: relative; overflow: hidden;
+  }
+  .back-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(70% 100% at 100% 100%, rgba(255,106,61,0.30), transparent 60%);
+  }
+  .back-cta > * { position: relative; }
+  .back-cta h3 {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 26px; line-height: 1.05; margin: 0 0 8px;
+    letter-spacing: -0.022em;
+  }
+  .back-cta h3 .grad {
+    background: var(--grad-edge);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .back-cta .lines {
+    display: grid; gap: 8px; margin-top: 14px;
+    font-family: var(--font-sans); font-size: 13.5px;
+    color: #F3F1EC;
+  }
+  .back-cta .lines .row { display: flex; align-items: center; gap: 10px; }
+  .back-cta .lines svg { width: 16px; height: 16px; color: #FF8F5C; stroke-width: 1.75; }
+  .back-cta .lines .row strong { font-weight: 600; }
+
+  .back-foot {
+    margin-top: auto; padding-top: 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #6E7886;
+  }
+  .back-foot img { height: 22px; opacity: 0.85; }
+
+  /* ===========================================================
+     INSIDE LEFT — Problems
+     =========================================================== */
+  .inside-left { padding: 44px 32px 40px; background: var(--paper); display: flex; flex-direction: column; }
+  .il-eyebrow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #E03A1F;
+  }
+  .il-head {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 34px; line-height: 1.0; letter-spacing: -0.022em;
+    color: #11161E; margin: 14px 0 0;
+  }
+  .il-head .grad {
+    background: var(--grad-edge);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .il-list {
+    list-style: none; padding: 0; margin: 22px 0 0;
+    display: grid; gap: 10px;
+  }
+  .il-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-family: var(--font-sans); font-size: 14px;
+    line-height: 1.4; color: #11161E;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid rgba(15,22,36,0.08);
+    border-radius: 12px;
+  }
+  .il-list .x {
+    width: 22px; height: 22px; border-radius: 99px;
+    background: rgba(224,58,31,0.10);
+    color: #E03A1F;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-list .x svg { width: 13px; height: 13px; stroke-width: 2.25; }
+
+  .il-foot {
+    margin-top: auto; padding-top: 22px;
+    border-top: 1px solid rgba(15,22,36,0.10);
+    font-family: var(--font-display); font-style: italic;
+    font-size: 20px; line-height: 1.2; letter-spacing: -0.015em;
+    color: #11161E;
+  }
+  .il-foot .em { color: #E03A1F; font-style: italic; }
+
+  /* ===========================================================
+     INSIDE CENTER — primary services
+     =========================================================== */
+  .inside-center {
+    background: var(--ink-1000);
+    color: #F3F1EC;
+    padding: 44px 32px 40px;
+    display: flex; flex-direction: column;
+  }
+  .inside-center::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(50% 35% at 100% 0%, rgba(255,106,61,0.20), transparent 60%),
+      radial-gradient(50% 35% at 0% 100%, rgba(91,196,238,0.16), transparent 60%);
+    pointer-events: none;
+  }
+  .inside-center > * { position: relative; }
+  .ic-eyebrow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,143,92,0.95);
+  }
+  .ic-head {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 32px; line-height: 1.0; letter-spacing: -0.022em;
+    color: #F3F1EC; margin: 12px 0 0;
+  }
+  .ic-head .grad {
+    background: var(--grad-edge);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .ic-service {
+    margin-top: 18px;
+    padding: 16px 16px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .ic-service-head {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ic-service-ic {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: rgba(255,106,61,0.16);
+    color: #FF8F5C;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ic-service-ic svg { width: 16px; height: 16px; stroke-width: 1.75; }
+  .ic-service:nth-of-type(2) .ic-service-ic {
+    background: rgba(91,196,238,0.16); color: #5BC4EE;
+  }
+  .ic-service:nth-of-type(3) .ic-service-ic {
+    background: rgba(255,106,61,0.16); color: #FF8F5C;
+  }
+  .ic-service h3 {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 20px; line-height: 1; letter-spacing: -0.015em;
+    margin: 0; color: #F3F1EC;
+  }
+  .ic-service p {
+    font-family: var(--font-sans); font-size: 12.5px; line-height: 1.5;
+    color: #BCC4D2; margin: 8px 0 10px;
+  }
+  .ic-service .ticks {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-wrap: wrap; gap: 6px 10px;
+  }
+  .ic-service .ticks li {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--font-sans); font-size: 11.5px;
+    color: #F3F1EC; font-weight: 500;
+  }
+  .ic-service .ticks svg {
+    width: 12px; height: 12px; color: #FF8F5C; stroke-width: 2.5;
+  }
+  .ic-service:nth-of-type(2) .ticks svg { color: #5BC4EE; }
+
+  /* ===========================================================
+     INSIDE RIGHT — Website + Why us
+     =========================================================== */
+  .inside-right { padding: 44px 32px 40px; background: var(--paper); display: flex; flex-direction: column; }
+  .ir-eyebrow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #2A7BC5;
+  }
+  .ir-head {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 32px; line-height: 1.0; letter-spacing: -0.022em;
+    color: #11161E; margin: 12px 0 0;
+  }
+  .ir-head .grad {
+    background: linear-gradient(95deg, #5BC4EE 0%, #2A7BC5 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .ir-lede {
+    font-family: var(--font-sans); font-size: 13.5px; line-height: 1.5;
+    color: #3A4351; margin: 12px 0 14px;
+  }
+
+  .ir-card {
+    background: #fff;
+    border: 1px solid rgba(15,22,36,0.08);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    margin-bottom: 14px;
+  }
+  .ir-card-head {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .ir-card-ic {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: rgba(42,123,197,0.10); color: #2A7BC5;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ir-card-ic svg { width: 15px; height: 15px; stroke-width: 1.75; }
+  .ir-card h3 {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 19px; line-height: 1; letter-spacing: -0.015em;
+    margin: 0; color: #11161E;
+  }
+  .ir-card .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px;
+  }
+  .ir-card .grid li {
+    list-style: none;
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--font-sans); font-size: 12px;
+    color: #11161E; font-weight: 500;
+  }
+  .ir-card .grid svg { width: 12px; height: 12px; color: #2A7BC5; stroke-width: 2.5; }
+
+  .ir-why .ir-card-ic { background: rgba(255,106,61,0.10); color: #E03A1F; }
+  .ir-why .ir-card .grid svg { color: #E03A1F; }
+  .ir-why .ir-card .grid li svg { color: #E03A1F; }
+
+  /* Why us list - single column */
+  .ir-why-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 8px;
+  }
+  .ir-why-list li {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-sans); font-size: 13px;
+    color: #11161E; font-weight: 500;
+  }
+  .ir-why-list svg { width: 14px; height: 14px; color: #E03A1F; stroke-width: 2.25; flex-shrink: 0; }
+
+  .ir-foot {
+    margin-top: auto; padding-top: 22px;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #6E7886;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  @media print {
+    @page { size: A4 landscape; margin: 0; }
+    html, body { background: #fff; padding: 0; }
+    .stage { gap: 0; }
+    .sheet { box-shadow: none; page-break-after: always; }
+    .sheet-label { display: none; }
+    .fold-tick { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div class="sheet-label">A4 landscape · Outside (front cover, flap, back panel)</div>
+
+  <!-- ============================================================
+       SHEET 1 · OUTSIDE
+       [ Back panel ] [ Flap / quote ] [ Front cover ]
+       ============================================================ -->
+  <section class="sheet dark" data-screen-label="Outside · back-flap-cover">
+    <div class="fold-tick t1"></div>
+    <div class="fold-tick t2"></div>
+    <div class="fold-tick bottom t1"></div>
+    <div class="fold-tick bottom t2"></div>
+
+    <!-- BACK PANEL (left third — outside-left when folded) -->
+    <div class="panel back">
+      <div class="back-eyebrow">Who we work with</div>
+      <h2 class="back-head">Built for the businesses of <span class="grad">Salem.</span></h2>
+      <p class="back-sub">Whether you run a shop on the corner or a clinic with three branches — if your customers are searching online, we can help them find you.</p>
+
+      <ul class="back-sectors">
+        <li><i data-lucide="store"></i>Retail shops</li>
+        <li><i data-lucide="utensils"></i>Restaurants</li>
+        <li><i data-lucide="stethoscope"></i>Clinics</li>
+        <li><i data-lucide="graduation-cap"></i>Tuition centres</li>
+        <li><i data-lucide="scissors"></i>Salons &amp; spas</li>
+        <li><i data-lucide="sun"></i>Solar businesses</li>
+        <li><i data-lucide="rocket"></i>Startups</li>
+        <li><i data-lucide="wrench"></i>Service businesses</li>
+      </ul>
+
+      <div class="back-cta">
+        <h3>Let's grow your business <span class="grad">together.</span></h3>
+        <div class="lines">
+          <div class="row"><i data-lucide="phone"></i><span>Call / WhatsApp · <strong>99944 10224</strong></span></div>
+          <div class="row"><i data-lucide="globe"></i><span>www.edgifydigital.in</span></div>
+          <div class="row"><i data-lucide="map-pin"></i><span>Salem, Tamil Nadu</span></div>
+        </div>
+      </div>
+
+      <div class="back-foot">
+        <span>© 2026 Edgify Digital</span>
+        <span>@edgifydigital</span>
+      </div>
+    </div>
+
+    <!-- FLAP (middle third — folds inward, seen briefly during fold) -->
+    <div class="panel flap">
+      <div>
+        <div class="flap-eyebrow">Less talk · More traction</div>
+        <h2 class="flap-quote">A simple plan to get<br/><span class="grad">more customers</span> online.</h2>
+        <p class="flap-sub">We don't sell jargon. We build the system that puts your business in front of the people already searching for it — then we report the numbers, every month.</p>
+
+        <div class="flap-grid">
+          <div class="flap-stat"><div class="v">14×</div><div class="l">Lead growth · Shalom Group</div></div>
+          <div class="flap-stat"><div class="v">₹8.74</div><div class="l">Avg cost-per-click</div></div>
+          <div class="flap-stat"><div class="v">32.9K</div><div class="l">Impressions in 3 months</div></div>
+          <div class="flap-stat"><div class="v">₹10K</div><div class="l">Starting monthly budget</div></div>
+        </div>
+      </div>
+
+      <div class="flap-foot">
+        <div class="flap-mark"><i data-lucide="zap"></i></div>
+        <div>Real numbers.<br/>Real businesses.</div>
+      </div>
+    </div>
+
+    <!-- FRONT COVER (right third — outside-right when folded) -->
+    <div class="panel cover">
+      <img class="cover-logo" src="assets/logo/edgify-logo-light.png" alt="Edgify Digital"/>
+
+      <div>
+        <div class="cover-eyebrow">Digital marketing · Salem</div>
+        <h1 class="cover-title">Your business deserves <span class="grad">more customers.</span></h1>
+        <p class="cover-lede">We help local businesses in Salem grow online — through marketing that actually brings in enquiries.</p>
+
+        <ul class="cover-list">
+          <li><span class="tick"><i data-lucide="check"></i></span>Social media</li>
+          <li><span class="tick"><i data-lucide="check"></i></span>Google ads</li>
+          <li><span class="tick"><i data-lucide="check"></i></span>SEO</li>
+          <li><span class="tick"><i data-lucide="check"></i></span>Website design</li>
+          <li><span class="tick"><i data-lucide="check"></i></span>Branding</li>
+          <li><span class="tick"><i data-lucide="check"></i></span>Reporting</li>
+        </ul>
+
+        <div class="cover-tag">Simple marketing.<br/><em>Real results.</em></div>
+      </div>
+
+      <div class="cover-contact">
+        <div class="row"><i data-lucide="phone"></i><span>99944 10224</span></div>
+        <div class="row"><i data-lucide="globe"></i><span>edgifydigital.in</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sheet-label">A4 landscape · Inside (problems, services, website + why us)</div>
+
+  <!-- ============================================================
+       SHEET 2 · INSIDE
+       [ Inside left ] [ Inside center ] [ Inside right ]
+       ============================================================ -->
+  <section class="sheet" data-screen-label="Inside · problems-services-website">
+    <div class="fold-tick t1"></div>
+    <div class="fold-tick t2"></div>
+    <div class="fold-tick bottom t1"></div>
+    <div class="fold-tick bottom t2"></div>
+
+    <!-- INSIDE LEFT — Problems -->
+    <div class="panel inside-left">
+      <div class="il-eyebrow">Sound familiar?</div>
+      <h2 class="il-head">Is your business stuck with <span class="grad">these problems?</span></h2>
+
+      <ul class="il-list">
+        <li><span class="x"><i data-lucide="x"></i></span>Customers don't know your business exists.</li>
+        <li><span class="x"><i data-lucide="x"></i></span>Your Instagram page looks inactive.</li>
+        <li><span class="x"><i data-lucide="x"></i></span>No enquiries coming from online.</li>
+        <li><span class="x"><i data-lucide="x"></i></span>Competitors appear first on Google.</li>
+        <li><span class="x"><i data-lucide="x"></i></span>Running ads — but not getting leads.</li>
+        <li><span class="x"><i data-lucide="x"></i></span>No proper website for your business.</li>
+      </ul>
+
+      <p class="il-foot">Today, people search online <em class="em">before</em> they buy. If your business isn't visible online — they choose someone else.</p>
+    </div>
+
+    <!-- INSIDE CENTER — Three primary services -->
+    <div class="panel inside-center">
+      <div class="ic-eyebrow">What we do</div>
+      <h2 class="ic-head">We help businesses <span class="grad">grow online.</span></h2>
+
+      <div class="ic-service">
+        <div class="ic-service-head">
+          <div class="ic-service-ic"><i data-lucide="megaphone"></i></div>
+          <h3>Social media marketing</h3>
+        </div>
+        <p>Professional posts and reels that attract local customers and keep your page active.</p>
+        <ul class="ticks">
+          <li><i data-lucide="check"></i>Instagram management</li>
+          <li><i data-lucide="check"></i>Facebook marketing</li>
+          <li><i data-lucide="check"></i>Reels &amp; creative design</li>
+        </ul>
+      </div>
+
+      <div class="ic-service">
+        <div class="ic-service-head">
+          <div class="ic-service-ic"><i data-lucide="target"></i></div>
+          <h3>Google &amp; Meta ads</h3>
+        </div>
+        <p>Reach the right people near your business — and turn them into real enquiries.</p>
+        <ul class="ticks">
+          <li><i data-lucide="check"></i>Lead generation ads</li>
+          <li><i data-lucide="check"></i>WhatsApp ads</li>
+          <li><i data-lucide="check"></i>Google search ads</li>
+        </ul>
+      </div>
+
+      <div class="ic-service">
+        <div class="ic-service-head">
+          <div class="ic-service-ic"><i data-lucide="search"></i></div>
+          <h3>SEO &amp; Google ranking</h3>
+        </div>
+        <p>Help customers find your business at the top when they search online.</p>
+        <ul class="ticks">
+          <li><i data-lucide="check"></i>Local SEO</li>
+          <li><i data-lucide="check"></i>Google Business Profile</li>
+          <li><i data-lucide="check"></i>Website optimisation</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- INSIDE RIGHT — Website + Why us -->
+    <div class="panel inside-right">
+      <div class="ir-eyebrow">More from Edgify</div>
+      <h2 class="ir-head">A website that <span class="grad">builds trust</span> instantly.</h2>
+      <p class="ir-lede">A professional website is the first thing customers check before they call. We build sites that load fast, look modern and turn visitors into enquiries.</p>
+
+      <div class="ir-card">
+        <div class="ir-card-head">
+          <div class="ir-card-ic"><i data-lucide="monitor"></i></div>
+          <h3>Website design</h3>
+        </div>
+        <ul class="grid">
+          <li><i data-lucide="check"></i>Business websites</li>
+          <li><i data-lucide="check"></i>Mobile-friendly design</li>
+          <li><i data-lucide="check"></i>Fast loading pages</li>
+          <li><i data-lucide="check"></i>WhatsApp integration</li>
+        </ul>
+      </div>
+
+      <div class="ir-card ir-why">
+        <div class="ir-card-head">
+          <div class="ir-card-ic"><i data-lucide="zap"></i></div>
+          <h3>Why choose Edgify?</h3>
+        </div>
+        <ul class="ir-why-list">
+          <li><i data-lucide="check"></i>Easy, direct communication</li>
+          <li><i data-lucide="check"></i>Affordable for local businesses</li>
+          <li><i data-lucide="check"></i>Modern, creative designs</li>
+          <li><i data-lucide="check"></i>Focused on local business growth</li>
+          <li><i data-lucide="check"></i>Personalised support, every step</li>
+        </ul>
+      </div>
+
+      <div class="ir-foot">
+        <span>03 · Website &amp; why us</span>
+        <span>edgifydigital.in</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>

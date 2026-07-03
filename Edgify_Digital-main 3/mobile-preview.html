@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Edgify Digital — Mobile Preview</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<style>
+  html, body {
+    margin: 0;
+    background: var(--bg-2);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .mp-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 64px;
+    gap: 28px;
+  }
+  .mp-head {
+    text-align: center;
+    max-width: 560px;
+  }
+  .mp-head h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.05;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+  .mp-head p {
+    color: var(--text-dim);
+    font-size: 15px;
+    margin: 0;
+  }
+  .mp-tabs {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    box-shadow: 0 6px 22px -10px rgba(11,42,74,0.20);
+  }
+  .mp-tab {
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .mp-tab:hover { color: var(--text); }
+  .mp-tab.is-active {
+    background: linear-gradient(95deg, var(--brand-coral) 0%, var(--brand-red) 100%);
+    color: #fff;
+  }
+  .mp-size-toggle {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+  }
+  .mp-size-toggle button {
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-dim);
+    font-weight: 600;
+    font-family: var(--font-body);
+    letter-spacing: 0.02em;
+  }
+  .mp-size-toggle button.is-active {
+    background: var(--bg-2);
+    color: var(--text);
+  }
+
+  /* Device frame — pure CSS iPhone-ish */
+  .phone {
+    --phone-w: 390px;
+    --phone-h: 800px;
+    --phone-radius: 52px;
+    width: calc(var(--phone-w) + 16px);
+    height: calc(var(--phone-h) + 16px);
+    border-radius: calc(var(--phone-radius) + 6px);
+    background: #0B0F18;
+    padding: 8px;
+    box-shadow:
+      0 50px 90px -30px rgba(11,42,74,0.35),
+      0 20px 40px -20px rgba(11,42,74,0.30),
+      inset 0 0 0 2px rgba(255,255,255,0.04);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone.size-sm { --phone-w: 360px; --phone-h: 740px; }
+  .phone.size-lg { --phone-w: 430px; --phone-h: 880px; }
+
+  .phone::before,
+  .phone::after {
+    content: "";
+    position: absolute;
+    background: #1a1f2b;
+    border-radius: 4px;
+  }
+  /* Side buttons */
+  .phone::before { left: -3px; top: 110px; width: 3px; height: 32px; }
+  .phone::after { left: -3px; top: 160px; width: 3px; height: 56px; }
+  .phone .btn-right {
+    position: absolute;
+    right: -3px;
+    top: 140px;
+    width: 3px;
+    height: 80px;
+    background: #1a1f2b;
+    border-radius: 4px;
+  }
+
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--phone-radius);
+    background: #000;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Dynamic Island */
+  .phone-island {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 118px;
+    height: 34px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .phone-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: var(--bg);
+    display: block;
+  }
+
+  .mp-meta {
+    color: var(--text-mute);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: -8px;
+  }
+
+  .mp-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .mp-shell { padding: 18px 12px 40px; }
+    .mp-tab { padding: 8px 14px; font-size: 13px; }
+    .phone {
+      --phone-w: 320px;
+      --phone-h: 680px;
+      --phone-radius: 44px;
+    }
+    .phone.size-lg { --phone-w: 340px; --phone-h: 720px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mp-shell">
+
+  <div class="mp-head">
+    <h1>Mobile preview</h1>
+    <p>How the site renders on a phone. Tap a page or change the device width.</p>
+  </div>
+
+  <div class="mp-controls">
+    <div class="mp-tabs" role="tablist">
+      <button type="button" class="mp-tab is-active" data-src="index.html">Home</button>
+      <button type="button" class="mp-tab" data-src="services.html">Services</button>
+      <button type="button" class="mp-tab" data-src="about.html">About</button>
+      <button type="button" class="mp-tab" data-src="pricing.html">Pricing</button>
+      <button type="button" class="mp-tab" data-src="contact.html">Contact</button>
+    </div>
+
+    <div class="mp-size-toggle" role="tablist" aria-label="Device width">
+      <button type="button" data-size="sm">iPhone SE · 360</button>
+      <button type="button" data-size="md" class="is-active">iPhone 14 · 390</button>
+      <button type="button" data-size="lg">iPhone Pro Max · 430</button>
+    </div>
+
+    <div class="mp-meta" id="mp-meta">index.html · 390 × 800</div>
+  </div>
+
+  <div class="phone size-md" id="phone">
+    <span class="btn-right"></span>
+    <div class="phone-inner">
+      <div class="phone-island"></div>
+      <iframe class="phone-iframe" id="mp-iframe" src="index.html" title="Mobile preview" loading="lazy"></iframe>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const iframe = document.getElementById('mp-iframe');
+  const phone = document.getElementById('phone');
+  const meta = document.getElementById('mp-meta');
+  const tabs = document.querySelectorAll('.mp-tab');
+  const sizeBtns = document.querySelectorAll('.mp-size-toggle button');
+
+  let currentSrc = 'index.html';
+  let currentSize = 'md';
+
+  const sizeLabels = {
+    sm: '360 × 740',
+    md: '390 × 800',
+    lg: '430 × 880'
+  };
+
+  function updateMeta() {
+    meta.textContent = currentSrc + ' · ' + sizeLabels[currentSize];
+  }
+
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('is-active'));
+      t.classList.add('is-active');
+      currentSrc = t.dataset.src;
+      iframe.src = currentSrc;
+      updateMeta();
+    });
+  });
+
+  sizeBtns.forEach(b => {
+    b.addEventListener('click', () => {
+      sizeBtns.forEach(x => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      currentSize = b.dataset.size;
+      phone.classList.remove('size-sm','size-md','size-lg');
+      phone.classList.add('size-' + currentSize);
+      updateMeta();
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
