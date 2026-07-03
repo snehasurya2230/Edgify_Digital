@@ -1,0 +1,259 @@
+/* ============================================================
+   EDGIFY DESIGN SYSTEM — colors_and_type.css
+   Single source of truth for color & type tokens.
+   ============================================================ */
+
+/* ----------  WEB FONTS  ---------------------------------- */
+/* Substitutions flagged in README. Replace @import with local
+   @font-face declarations if you ship custom files in fonts/. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ==========================================================
+     1. BRAND CORE — derived directly from the logo
+     ========================================================== */
+
+  /* Orange→Red ramp ("EDGIFY" wordmark) */
+  --ember-50:  #FFF1EA;
+  --ember-100: #FFD9C2;
+  --ember-200: #FFB590;
+  --ember-300: #FF8A5C;
+  --ember-400: #FF6A3D;   /* primary orange */
+  --ember-500: #F04E2C;
+  --ember-600: #E03A1F;   /* deep red */
+  --ember-700: #B82B17;
+  --ember-800: #8A1F10;
+
+  /* Blue→Cyan ramp ("DIGITAL MARKETING" + bolt) */
+  --tide-50:  #E8F6FE;
+  --tide-100: #C2E8FB;
+  --tide-200: #8DD3F5;
+  --tide-300: #5BC4EE;   /* primary cyan */
+  --tide-400: #3BA7DE;
+  --tide-500: #2A7BC5;   /* deep blue */
+  --tide-600: #1F5DA0;
+  --tide-700: #163F71;
+  --tide-800: #0D2748;
+
+  /* Signature brand gradients */
+  --grad-ember: linear-gradient(95deg, #FF8A3D 0%, #FF6A3D 45%, #E84141 100%);
+  --grad-tide:  linear-gradient(95deg, #5BC4EE 0%, #3BA7DE 50%, #2A7BC5 100%);
+  --grad-edge:  linear-gradient(95deg, #5BC4EE 0%, #3BA7DE 38%, #FF8A3D 62%, #E84141 100%);
+  --grad-edge-soft: linear-gradient(135deg, rgba(91,196,238,0.16) 0%, rgba(255,138,61,0.16) 100%);
+
+  /* ==========================================================
+     2. NEUTRALS — warm ink scale
+     ========================================================== */
+  --ink-1000: #06080D;   /* deepest — outer canvas */
+  --ink-950:  #0A1422;   /* premium navy-black */
+  --ink-900:  #0F1B2D;   /* surface 1 */
+  --ink-800:  #182438;   /* surface 2 */
+  --ink-700:  #243349;   /* card border on dark */
+  --ink-600:  #36465E;
+  --ink-500:  #56657D;
+  --ink-400:  #7A879C;
+  --ink-300:  #A4AEBF;
+  --ink-200:  #CFD5E0;
+  --ink-100:  #E6E9EF;
+  --ink-50:   #F1F3F7;
+
+  /* Warm paper (light theme + print) */
+  --paper:        #F6F2EA;
+  --paper-soft:   #FBF8F2;
+  --paper-deep:   #ECE5D6;
+
+  /* ==========================================================
+     3. SEMANTIC TOKENS — dark theme (default)
+     ========================================================== */
+  --bg:           var(--ink-1000);
+  --bg-elev-1:    var(--ink-950);
+  --bg-elev-2:    var(--ink-900);
+  --bg-elev-3:    var(--ink-800);
+
+  --fg-1:         #F3F1EC;       /* primary text on dark */
+  --fg-2:         #BCC4D2;       /* secondary */
+  --fg-3:         #7A879C;       /* tertiary, meta */
+  --fg-4:         #56657D;       /* placeholder, disabled */
+
+  --line:         rgba(255,255,255,0.08);
+  --line-strong:  rgba(255,255,255,0.16);
+
+  --brand:        var(--ember-400);
+  --brand-alt:    var(--tide-400);
+  --brand-grad:   var(--grad-edge);
+
+  --success: #2DBB7B;
+  --warning: #F2B441;
+  --danger:  #E84141;
+  --info:    var(--tide-300);
+
+  /* Chart accents (orderly, brand-coherent) */
+  --chart-1: var(--ember-400);
+  --chart-2: var(--tide-300);
+  --chart-3: var(--tide-500);
+  --chart-4: var(--ember-200);
+  --chart-5: #8B6BD9;     /* one neutral accent for variety */
+  --chart-6: #2DBB7B;
+
+  /* ==========================================================
+     4. TYPOGRAPHY — families & scale
+     ========================================================== */
+  --font-display: 'Instrument Serif', 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-sans:    'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Modular scale — major-third on display, minor-third on body */
+  --fs-display-3xl: 96px;
+  --fs-display-2xl: 72px;
+  --fs-display-xl:  56px;
+  --fs-display-lg:  44px;
+  --fs-display-md:  34px;
+
+  --fs-h1: 40px;
+  --fs-h2: 30px;
+  --fs-h3: 22px;
+  --fs-h4: 18px;
+  --fs-lg: 18px;
+  --fs-md: 16px;
+  --fs-sm: 14px;
+  --fs-xs: 12px;
+
+  --lh-tight:   1.05;
+  --lh-snug:    1.18;
+  --lh-normal:  1.45;
+  --lh-relaxed: 1.6;
+
+  --tracking-tight: -0.022em;
+  --tracking-snug:  -0.012em;
+  --tracking-flat:  0;
+  --tracking-wide:  0.06em;
+  --tracking-eyebrow: 0.18em;
+
+  /* ==========================================================
+     5. SPACING, RADIUS, SHADOW, MOTION
+     ========================================================== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* Shadows — used sparingly. Dark theme prefers borders + inner glow;
+     light theme uses warm subtle drops. */
+  --shadow-sm:  0 1px 2px rgba(7, 12, 22, 0.32);
+  --shadow-md:  0 6px 18px rgba(7, 12, 22, 0.38);
+  --shadow-lg:  0 20px 48px rgba(7, 12, 22, 0.5);
+  --shadow-glow-ember: 0 0 0 1px rgba(255,106,61,0.35), 0 12px 40px -8px rgba(255,106,61,0.45);
+  --shadow-glow-tide:  0 0 0 1px rgba(91,196,238,0.30), 0 12px 40px -8px rgba(91,196,238,0.40);
+
+  /* Light-theme print shadows */
+  --shadow-paper-sm: 0 1px 2px rgba(50, 32, 18, 0.06);
+  --shadow-paper-md: 0 8px 24px rgba(50, 32, 18, 0.08);
+
+  /* Motion */
+  --ease-out:  cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in:   cubic-bezier(0.6, 0, 0.85, 0.4);
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:   140ms;
+  --dur-base:   240ms;
+  --dur-slow:   420ms;
+}
+
+/* Light / paper theme — used by Brochure, Visiting Card, print collateral */
+[data-theme="paper"] {
+  --bg:        var(--paper);
+  --bg-elev-1: var(--paper-soft);
+  --bg-elev-2: #FFFFFF;
+  --bg-elev-3: #FFFFFF;
+  --fg-1: #11161E;
+  --fg-2: #3A4351;
+  --fg-3: #6E7886;
+  --fg-4: #A2ABB8;
+  --line:        rgba(15, 22, 36, 0.10);
+  --line-strong: rgba(15, 22, 36, 0.22);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES — opt-in via class .edg-prose
+   or by applying tokens directly to your own selectors.
+   ============================================================ */
+
+.edg-prose h1, .edg-display-1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display-2xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+.edg-prose h2, .edg-display-2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display-lg);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+}
+.edg-prose h3, .edg-h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+}
+.edg-prose h4, .edg-h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-snug);
+}
+.edg-prose p, .edg-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-2);
+}
+.edg-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--fg-3);
+}
+.edg-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Signature gradient text */
+.edg-grad-text {
+  background: var(--grad-edge);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.edg-grad-text-ember {
+  background: var(--grad-ember);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.edg-grad-text-tide {
+  background: var(--grad-tide);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
