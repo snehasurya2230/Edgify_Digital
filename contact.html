@@ -71,8 +71,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  <div class="container">
  <div class="contact-grid">
 
- <form class="form" action="https://formspree.io/f/mlgvvyno" method="POST">
- <input type="hidden" name="_next" value="https://edgifydigital.in/thank-you.html" />
+ <form class="form" id="contact-form" action="https://formspree.io/f/mlgvvyno" method="POST">
 
  <div class="field-row">
  <div class="field">
@@ -269,6 +268,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    });
  });
 </script>
+
+<script>
+ // Submit contact form via AJAX, then redirect to Thank You page
+ const contactForm = document.getElementById('contact-form');
+ contactForm.addEventListener('submit', function (e) {
+   e.preventDefault();
+   const submitBtn = contactForm.querySelector('button[type="submit"]');
+   const originalText = submitBtn.innerHTML;
+   submitBtn.disabled = true;
+   submitBtn.innerHTML = 'Sending...';
+
+   fetch(contactForm.action, {
+     method: 'POST',
+     body: new FormData(contactForm),
+     headers: { 'Accept': 'application/json' }
+   })
+   .then(function (res) {
+     if (res.ok) {
+       window.location.href = 'thank-you.html';
+     } else {
+       submitBtn.disabled = false;
+       submitBtn.innerHTML = originalText;
+       alert('Something went wrong. Please try again or email us directly.');
+     }
+   })
+   .catch(function () {
+     submitBtn.disabled = false;
+     submitBtn.innerHTML = originalText;
+     alert('Something went wrong. Please try again or email us directly.');
+   });
+ });
+</script>
+
 
 
 <!-- WhatsApp Float Button -->
