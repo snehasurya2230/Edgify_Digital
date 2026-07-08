@@ -286,6 +286,26 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
 /* ---------- Hero ---------- */
 .hero { padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(56px, 7vw, 120px); position: relative; overflow: hidden; }
 
+/* Section with a subtle teal tint + glow, used to break up long stretches of the same background */
+.section-teal-tint {
+  position: relative;
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+  overflow: hidden;
+}
+.section-teal-tint::before {
+  content: "";
+  position: absolute;
+  right: -180px; top: -160px;
+  width: 520px; height: 520px;
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--accent-2) 22%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.section-teal-tint .container { position: relative; z-index: 1; }
+
+.hero-meta > div:nth-child(2) .num,
+.case-result > div:nth-child(2) .num { color: var(--accent-2); }
+
 /* glow background fixture */
 .hero::before {
   content: "";
@@ -310,8 +330,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
   pointer-events: none;
   z-index: 0;
 }
-:root[data-variation="editorial"] .hero::before { background: radial-gradient(closest-side, rgba(255,107,59,0.16), transparent 70%); }
-:root[data-variation="editorial"] .hero::after  { background: radial-gradient(closest-side, rgba(31,124,200,0.12), transparent 70%); }
+:root[data-variation="editorial"] .hero::before { background: radial-gradient(closest-side, rgba(255,107,59,0.18), transparent 70%); }
+:root[data-variation="editorial"] .hero::after  { background: radial-gradient(closest-side, rgba(46,143,160,0.22), transparent 70%); }
 
 .hero .container { position: relative; z-index: 1; }
 
@@ -1224,6 +1244,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
   color: var(--accent);
   letter-spacing: 0.08em;
 }
+.funnel-stage:nth-child(even) .funnel-num { color: var(--accent-2); }
+.funnel-stage:nth-child(even)::after { background: var(--accent-2); }
 .funnel-stage h5 {
   font-family: var(--font-display);
   font-weight: 700;
